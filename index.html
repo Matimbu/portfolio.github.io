@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Raywel Francis T. Martin | Portfolio</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -15,31 +14,51 @@
   --accent: #c9a96e;
   --text: #eaeaea;
   --muted: #9aa0a6;
-  --border: rgba(255,255,255,0.08);
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
   background: linear-gradient(180deg, #0b0c10, #111218);
   color: var(--text);
   font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
+section {
+  padding: 5rem 0;
+}
+
+/* ── Navbar ─────────────────────────────────────────────── */
 .navbar {
-  background: rgba(11,12,16,0.95);
+  background: rgba(11, 12, 16, 0.95);
   border-bottom: 1px solid var(--border);
 }
+
 .navbar-brand {
   font-weight: bold;
   letter-spacing: 2px;
   color: var(--accent) !important;
 }
+
+.navbar-toggler {
+  border-color: var(--border);
+}
+
 .nav-link {
   color: var(--muted) !important;
+  transition: color 0.2s;
 }
-.nav-link:hover {
+
+.nav-link:hover,
+.nav-link.active-nav {
   color: var(--accent) !important;
 }
 
+/* ── Hero ───────────────────────────────────────────────── */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -52,15 +71,25 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-label {
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .hero-name {
-  font-size: 3.5rem;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 800;
+  line-height: 1.1;
 }
+
 .hero-name span {
   color: var(--accent);
 }
@@ -68,108 +97,205 @@ body {
 .hero-tagline {
   color: var(--muted);
   max-width: 500px;
+  margin-top: 1rem;
 }
+
 
 .btn-gold {
   background: var(--accent);
   color: #000;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
 }
+
+.btn-gold:hover {
+  opacity: 0.85;
+  color: #000;
+}
+
 .btn-ghost {
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 10px 20px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s;
 }
 
-section {
-  padding: 5rem 0;
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--text);
 }
+
+/* ── Section Titles ─────────────────────────────────────── */
+.sec-label {
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
 .sec-title {
   font-weight: 700;
+  margin-bottom: 6px;
 }
+
 .sec-line {
   width: 50px;
   height: 3px;
   background: var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  border: none;
 }
 
-.card-custom, .project-card {
-  background: var(--card);
+/* ── Cards ──────────────────────────────────────────────── */
+.card-custom {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+.project-card {
+  background: linear-gradient(145deg, #16171f, #1c1d26);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 1.5rem;
 }
 
-#contact .border {
-  border: 1px solid var(--border) !important;
-  background: var(--card);
+/* ── About ──────────────────────────────────────────────── */
+.info-pill {
+  display: inline-block;
+  font-size: 13px;
+  background: rgba(201, 169, 110, 0.1);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-right: 6px;
+  margin-top: 6px;
 }
 
-footer {
-  border-top: 1px solid var(--border);
-  text-align: center;
-  padding: 20px;
+.stack-label {
+  font-size: 12px;
+  letter-spacing: 2px;
   color: var(--muted);
+  margin-bottom: 12px;
 }
 
-.project-1 { /*-------------------------------       PROJECT 1         --------------------------*/
-  background: linear-gradient(145deg, #16171f, #1c1d26);
+.tech-pill {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 25px;
-  transition: 0.3s;
-  display: block;
-  text-decoration: none;
   color: var(--text);
 }
-.project-bg {
-  position: relative;
+
+/* ── Projects ───────────────────────────────────────────── */
+.proj-label {
+  color: #ffc107;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.proj-divider {
+  width: 50px;
+  border: 2px solid #ffc107;
+  margin: 12px auto;
+  opacity: 1;
+}
+
+.proj-tagline {
+  font-style: italic;
+  color: #9aa0a6;
+  font-size: 14px;
+}
+
+.proj-bg-block {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.highlight {
+  color: #ffc107;
+}
+
+/* ── Kiosk Card ─────────────────────────────────────────── */
+.kiosk-card {
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.kiosk-card:hover {
+  border-color: #c9a96e;
+  box-shadow: 0 0 28px rgba(201, 169, 110, 0.25);
+  color: var(--text);
+}
+
+/* ── Cheesy Card ────────────────────────────────────────── */
+.cheesy-card {
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cheesy-card:hover {
+  border-color: #c9a96e;
+  box-shadow: 0 0 28px rgba(201, 169, 110, 0.25);
+  color: var(--text);
+}
+
+.cheesy-img-frame {
+  width: 100%;
+  border-radius: 12px;
   overflow: hidden;
-  height: 300px;
-
-  background-image: url('kiosk-bg.png');
-  background-size: cover;
-  background-position: center;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.25rem 0;
+  margin-bottom: 1.5rem;
 }
 
-.project-bg:hover {
-  transform: scale(1.02);
-}
-
-.project-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6); 
-}
-
-.overlay-content {
-  position: relative;
-  z-index: 2;
-}
-
-.project-2 { /*-------------------------------       PROJECT 2         --------------------------*/
-  background: linear-gradient(145deg, #16171f, #1c1d26);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 25px;
-  transition: 0.3s;
+.cheesy-img-frame img {
+  width: 220px;
+  object-fit: contain;
   display: block;
-  text-decoration: none;
-  color: var(--text);
+  margin: 0 auto;
+  border-radius: 10px;
+  transition: box-shadow 0.3s, transform 0.3s;
 }
 
-.project-2:hover img {
+.cheesy-img-frame img:hover {
+  box-shadow: 0 0 22px rgba(255, 193, 7, 0.55);
   transform: scale(1.03);
-  transition: 0.3s;
 }
 
-.project-card {/*-------------------------------       PROJECT SAP         --------------------------*/
-  background: linear-gradient(145deg, #16171f, #1c1d26);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+.cheesy-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  text-align: left;
+}
+
+/* ── Certifications ─────────────────────────────────────── */
+.certs-wrap {
+  max-width: 660px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .cert-card {
@@ -177,42 +303,33 @@ footer {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 25px;
-  transition: 0.3s;
-  display: block;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
   text-decoration: none;
   color: var(--text);
 }
 
 .cert-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: var(--text);
 }
 
 .cert-icon {
   width: 55px;
   height: 55px;
+  flex-shrink: 0;
   border-radius: 12px;
-  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
 }
 
-.cert-title {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.cert-sub {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.cert-date {
-  font-size: 12px;
-  color: var(--muted);
-}
+.cert-title  { font-weight: 600; font-size: 15px; }
+.cert-sub    { font-size: 13px; color: var(--muted); }
+.cert-date   { font-size: 12px; color: var(--muted); }
 
 .cert-pill {
   font-size: 11px;
@@ -223,21 +340,32 @@ footer {
 }
 
 .cert-pill.blue {
-  background: rgba(13,110,253,0.15);
+  background: rgba(13, 110, 253, 0.15);
   color: #7ab8ff;
   border: none;
 }
 
 .cert-pill.gold {
-  background: rgba(201,169,110,0.15);
+  background: rgba(201, 169, 110, 0.15);
   color: var(--accent);
   border: none;
 }
 
-.contact-item { /*-------------------------------       PROJECT SAP         --------------------------*/
+/* ── Affiliations ───────────────────────────────────────── */
+.affil-icon {
+  font-size: 2rem;
+}
+
+/* ── Contact ────────────────────────────────────────────── */
+.contact-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-item {
   border: 1px solid var(--border);
   background: var(--card);
-  transition: 0.3s ease;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
   text-decoration: none;
   color: var(--text);
 }
@@ -245,299 +373,369 @@ footer {
 .contact-item:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  background: rgba(201,169,110,0.05);
+  background: rgba(201, 169, 110, 0.05);
+  color: var(--text);
 }
 
+/* ── Footer ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+}
 </style>
 </head>
 
 <body>
 
+<!-- ── NAVBAR ───────────────────────────────────────────────────────────── -->
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">RFM</a>
-    <div class="ms-auto">
-      <a class="nav-link d-inline" href="#about">About</a>
-      <a class="nav-link d-inline" href="#projects">Projects</a>
-      <a class="nav-link d-inline" href="#contact">Contact</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <div class="ms-auto">
+        <a class="nav-link d-inline" href="#about">About</a>
+        <a class="nav-link d-inline" href="#featured">Projects</a>
+        <a class="nav-link d-inline" href="#credentials">Credentials</a>
+        <a class="nav-link d-inline" href="#contact">Contact</a>
+      </div>
     </div>
   </div>
 </nav>
 
+<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
 <section id="hero">
-<div class="grid-bg"></div>
-<div class="container position-relative">
-  <div class="row align-items-center">
-    <div class="col-lg-7">
-      <h1 class="hero-name">
-        Raywel <span>Francis</span><br>Martin
-      </h1>
+  <div class="grid-bg"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
 
-      <p class="hero-tagline">
-        I build clean, functional systems focused on simplicity and user experience.
-        Passionate about software development and modern UI design.
-      </p>
+        <p class="hero-label">// Full-Stack Developer (Student)</p>
 
-      <div class="mt-3">
-        <a href="#projects" class="btn-gold">View Work</a>
-        <a href="#contact" class="btn-ghost">Contact</a>
+        <h1 class="hero-name">
+          Raywel <span>Francis</span><br>Martin
+        </h1>
+
+        <p class="hero-tagline">
+          I build clean, functional systems focused on simplicity and user experience.
+          Passionate about software development and modern UI design.
+        </p>
+
+        <div class="mt-4 d-flex gap-3 flex-wrap">
+          <a href="#featured" class="btn-gold">View Work</a>
+          <a href="#contact" class="btn-ghost">Contact</a>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 </section>
 
+<!-- ── ABOUT ────────────────────────────────────────────────────────────── -->
 <section id="about">
-<div class="container">
-  <h2 class="sec-title">About Me</h2>
-  <div class="sec-line"></div>
+  <div class="container">
 
-  <div class="card-custom">
-    <p>
-      I'm Raywel Francis T. Martin, an IT student from STI College Malolos.
-      I enjoy building applications using Java and C#, and designing user interfaces with Figma.
-    </p>
-    <p>
-      I aim to become a Software Engineer who creates efficient, clean, and impactful systems.
-    </p>
+    <p class="sec-label">// Who I Am</p>
+    <h2 class="sec-title">About Me</h2>
+    <div class="sec-line"></div>
+
+    <div class="row g-4">
+
+      <!-- Bio -->
+      <div class="col-lg-7">
+        <div class="card-custom h-100">
+          <p>
+            I'm <strong>Raywel Francis T. Martin</strong>, an IT student from STI College Malolos,
+            also known on the court as <span class="highlight">Yao Ming — The Court's Coder</span>.
+          </p>
+          <p>
+            I enjoy building applications using Java and C#, and designing user interfaces with Figma.
+            My goal is to become a Software Engineer who creates efficient, clean, and impactful systems.
+          </p>
+          <p class="mb-0">
+            <span class="info-pill">🎓 STI College Malolos — BSIT</span>
+            <span class="info-pill">💼 Dream Job: Software Engineer</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="col-lg-5">
+        <div class="card-custom h-100">
+          <p class="stack-label">// TECH STACK</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="tech-pill">C#</span>
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">SQL / SQLite</span>
+            <span class="tech-pill">HTML</span>
+            <span class="tech-pill">CSS</span>
+            <span class="tech-pill">Bootstrap</span>
+            <span class="tech-pill">JavaScript</span>
+            <span class="tech-pill">Figma</span>
+            <span class="tech-pill">SAP S/4HANA</span>
+            <span class="tech-pill">WinForms</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 </section>
 
-<section id="projects">
+<!-- ── FEATURED PROJECTS ────────────────────────────────────────────────── -->
+<section id="featured">
   <div class="container">
+
+    <p class="sec-label text-center">// What I've Built</p>
     <h2 class="sec-title text-center">Featured Projects</h2>
     <div class="sec-line mx-auto"></div>
 
-    <div class="row g-4 mt-4">
+    <div class="row g-4">
 
-      <!-- Project 1 -----------------------------------------------------------------------------------------------------------------------
-       ===================================================================================================================================-->
+      <!-- KIOSK -->
       <div class="col-md-6">
+        <a href="https://github.com/Matimbu/kiosk-TheHive" target="_blank" class="card-custom d-block h-100 kiosk-card">
 
-        <a href="https://github.com/Matimbu/kiosk-TheHive" target="_blank" class="project-2 project-bg">
-          <div class="overlay-content text-center">
+          <p class="proj-label">// System Project</p>
+          <h4 class="fw-bold">The Hive Kiosk</h4>
+          <hr class="proj-divider">
 
-            <div class="mb-3" style="font-size:60px;">
-              🍵
+          <h6 class="proj-tagline">"Fast. Simple. Efficient Ordering Experience"</h6>
+
+          <p class="product-desc mt-3">
+            A self-service ordering system designed to enhance customer experience
+            through an intuitive interface and a streamlined checkout process.
+          </p>
+
+          <div class="row mt-3 text-start">
+            <div class="col-6">
+              <ul class="product-desc">
+                <li>User-friendly interface</li>
+                <li>Fast transaction flow</li>
+              </ul>
             </div>
-
-            <div class="mb-2">
-              
-              <span class="badge bg-dark border">C#</span>
-              <span class="badge bg-dark border">SQL</span>
-              
+            <div class="col-6">
+              <ul class="product-desc">
+                <li>Order management</li>
+                <li>Built with C# &amp; SQL</li>
+              </ul>
             </div>
+          </div>
 
-            <h4>The Hive Kiosk</h4>
-
-            <p>
-              A self-service ordering system designed to improve customer experience
-              with an intuitive interface and fast checkout process.
+          <div class="proj-bg-block mt-3">
+            <p class="fw-bold mb-1">Project Background</p>
+            <p class="product-desc mb-0">
+              Developed as a system project focused on improving service efficiency
+              through automation and modern interface design.
             </p>
-
           </div>
+
+          <div class="mt-3 d-flex gap-2 flex-wrap">
+            <span class="cert-pill gold">C#</span>
+            <span class="cert-pill gold">SQLite</span>
+            <span class="cert-pill gold">WinForms</span>
+          </div>
+
         </a>
       </div>
-      <!-- Project 2 (Poster with Image + Link) ------------------------------------------------------------------------------------------>
+
+      <!-- CHEESY BALLS -->
       <div class="col-md-6">
+        <a href="images/CHEESY POTATO BALLS.png" target="_blank" class="card-custom d-block h-100 text-center cheesy-card">
 
-        <a href="CHEESY POTATO BALLS.png" target="_blank" class="project-2">
-
-          <img src="images/CHEESY POTATO BALLS.png" 
-              alt="Cheesy Potato Balls Poster" 
-              class="img-fluid rounded mb-3">
-
-          <h4>Cheesy Potato Balls Poster</h4>
-
-          <p>
-            Promotional food poster showcasing visual hierarchy, branding, and modern layout design.
-          </p>
-
-        </a>
-
-      </div>
-
-      <!-- Project 3  SAP (Certificate Click → New Tab) --------------------------------------------------------------------------------------------------------->
-      <section id="credentials">
-        <div class="container">
-
-          <p class="text-center" style="color: var(--accent); letter-spacing: 2px;">
-            // Credentials
-          </p>
-
-          <h2 class="sec-title text-center">Certifications</h2>
-          <div class="sec-line mx-auto"></div>
-
-          <div class="row justify-content-center mt-5">
-
-            <div class="col-md-8">
-
-              <a href="certificate_sap.pdf" target="_blank" class="cert-card d-block">
-
-                <div class="d-flex gap-4 align-items-start">
-
-                  <!-- ICON -->
-                  <div class="cert-icon">
-                    <img src="images/sap-logo.png" style="width:30px;">
-                  </div>
-
-                  <!-- CONTENT -->
-                  <div class="flex-grow-1">
-
-                    <div class="cert-title">
-                      SD, MM, PP, FI, CO Modules of SAP S/4HANA using Global Bike
-                    </div>
-
-                    <div class="cert-sub mt-2">
-                      STI College, Philippines — SAP University Alliances
-                    </div>
-
-                    <div class="cert-date mt-2">
-                      📅 January 20, 2025 — June 7, 2025
-                    </div>
-
-                    <!-- TAGS -->
-                    <div class="d-flex flex-wrap gap-2 mt-4">
-                      <span class="cert-pill">Certificate of Participation</span>
-                      <span class="cert-pill blue">SAP University Alliances</span>
-                      <span class="cert-pill">ERP Training</span>
-                    </div>
-
-                    <!-- MODULE TAGS -->
-                    <div class="d-flex flex-wrap gap-2 mt-3">
-                      <span class="cert-pill gold">SD</span>
-                      <span class="cert-pill gold">MM</span>
-                      <span class="cert-pill gold">PP</span>
-                      <span class="cert-pill gold">FI</span>
-                      <span class="cert-pill gold">CO</span>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </a>
-
-            </div>
-
+          <div class="cheesy-img-frame">
+            <img src="images/CHEESY POTATO BALLS.png" alt="Cheesy Delight Balls">
           </div>
 
+          <p class="proj-label">// Entrepreneurship Project</p>
+          <h4 class="fw-bold">Cheesy Delight Balls</h4>
+          <hr class="proj-divider">
+
+          <h6 class="proj-tagline">"Where Crunch Meets Creamy Perfection"</h6>
+
+          <p class="product-desc mt-3">
+            Perfectly golden on the outside, irresistibly soft and cheesy on the inside —
+            made with <span class="highlight">premium ingredients</span> for the perfect crunch.
+          </p>
+
+          <div class="cheesy-divider">
+            <p class="fw-bold mb-1">Project Background</p>
+            <p class="product-desc mb-0">
+              Conceptualized in 2023 as a Senior High School Entrepreneurship project,
+              including poster design and product branding.
+            </p>
+          </div>
+
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDENTIALS ──────────────────────────────────────────────────────── -->
+<section id="credentials">
+  <div class="container">
+
+    <p class="sec-label text-center">// Credentials</p>
+    <h2 class="sec-title text-center">Certifications</h2>
+    <div class="sec-line mx-auto"></div>
+
+    <div class="certs-wrap">
+
+      <!-- SAP -->
+      <a href="certificate_sap.pdf" target="_blank" class="cert-card d-block">
+        <div class="d-flex gap-4 align-items-start">
+          <div class="cert-icon">
+            <img src="images/sap-logo.png" style="width:30px;" alt="SAP">
+          </div>
+          <div class="flex-grow-1">
+            <div class="cert-title">SD, MM, PP, FI, CO Modules of SAP S/4HANA using Global Bike</div>
+            <div class="cert-sub mt-2">STI College, Philippines — SAP University Alliances</div>
+            <div class="cert-date mt-2">📅 January 20, 2025 — June 7, 2025</div>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="cert-pill">Certificate of Participation</span>
+              <span class="cert-pill blue">SAP University Alliances</span>
+              <span class="cert-pill">ERP Training</span>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <span class="cert-pill gold">SD</span>
+              <span class="cert-pill gold">MM</span>
+              <span class="cert-pill gold">PP</span>
+              <span class="cert-pill gold">FI</span>
+              <span class="cert-pill gold">CO</span>
+            </div>
+          </div>
         </div>
-      
-      <!-- Project 4 (Certificate  JAVA  Click → New Tab) --------------------------------------------------------------------------------------------------------->
-      <div class="row justify-content-center mt-5 ">
-      <div class="col-md-8 mt-4 ">
+      </a>
 
-        <a href="certificate_java.pdf" target="_blank" class="cert-card d-block">
-
-          <div class="d-flex gap-4 align-items-start">
-
-            <!-- ICON -->
-            <div class="cert-icon" style="background: linear-gradient(135deg,#f7971e,#ffd200);">
-              ☕
+      <!-- JAVA -->
+      <a href="certificate_java.pdf" target="_blank" class="cert-card d-block">
+        <div class="d-flex gap-4 align-items-start">
+          <div class="cert-icon" style="background: linear-gradient(135deg,#f7971e,#ffd200);">☕</div>
+          <div class="flex-grow-1">
+            <div class="cert-title">Java Fundamentals</div>
+            <div class="cert-sub mt-2">Oracle Academy</div>
+            <div class="cert-date mt-2">📅 June 19, 2024</div>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="cert-pill">Course Completion</span>
+              <span class="cert-pill blue">Oracle Academy</span>
+              <span class="cert-pill">Programming</span>
             </div>
-
-            <!-- CONTENT -->
-            <div class="flex-grow-1">
-
-              <div class="cert-title">
-                Java Fundamentals
-              </div>
-
-              <div class="cert-sub mt-2">
-                Oracle Academy
-              </div>
-
-              <div class="cert-date mt-2">
-                📅 June 19, 2024
-              </div>
-
-              <!-- TAGS -->
-              <div class="d-flex flex-wrap gap-2 mt-4">
-                <span class="cert-pill">Course Completion</span>
-                <span class="cert-pill blue">Oracle Academy</span>
-                <span class="cert-pill">Programming</span>
-              </div>
-
-              <!-- SKILLS -->
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <span class="cert-pill gold">Java</span>
-                <span class="cert-pill gold">OOP</span>
-                <span class="cert-pill gold">Fundamentals</span>
-              </div>
-
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <span class="cert-pill gold">Java</span>
+              <span class="cert-pill gold">OOP</span>
+              <span class="cert-pill gold">Fundamentals</span>
             </div>
-
           </div>
+        </div>
+      </a>
 
-        </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── AFFILIATIONS ──────────────────────────────────────────────────────── -->
+<section id="affiliations">
+  <div class="container">
+
+    <p class="sec-label text-center">// Community</p>
+    <h2 class="sec-title text-center">Affiliations</h2>
+    <div class="sec-line mx-auto"></div>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4">
+        <div class="card-custom text-center h-100">
+          <div class="affil-icon">🎓</div>
+          <h6 class="fw-bold mt-3">STI College Malolos</h6>
+          <p class="product-desc mb-0">Bachelor of Science in Information Technology — Active student member</p>
+        </div>
       </div>
+
+      <div class="col-md-4">
+        <div class="card-custom text-center h-100">
+          <div class="affil-icon">🔷</div>
+          <h6 class="fw-bold mt-3">SAP University Alliances</h6>
+          <p class="product-desc mb-0">Participant in SAP S/4HANA ERP training program via STI</p>
+        </div>
       </div>
-        </section>
 
-
-
-      <!-- Project 4 (GitHub Link)              ------------------------------------------------------------------------>
-       <div class="row justify-content-center mt-5">
-      <div class="col-md-6">
-        <div class="project-card p-4 text-center">
-
-          <h4>My GitHub</h4>
-          <p class="mb-3">Check out my projects and code</p>
-
-          <a href="https://github.com/Matimbu" target="_blank" class="btn-gold" >
-            Visit GitHub
-          </a>
-
+      <div class="col-md-4">
+        <div class="card-custom text-center h-100">
+          <div class="affil-icon">☕</div>
+          <h6 class="fw-bold mt-3">Oracle Academy</h6>
+          <p class="product-desc mb-0">Completed Java Fundamentals under Oracle Academy's student program</p>
         </div>
       </div>
 
     </div>
   </div>
-</div>
 </section>
 
+<!-- ── GITHUB ────────────────────────────────────────────────────────────── -->
+<section id="github">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card-custom text-center">
+          <h4 class="fw-bold mb-2">My GitHub</h4>
+          <p class="product-desc mb-4">Check out my projects and code</p>
+          <a href="https://github.com/Matimbu" target="_blank" class="btn-gold">Visit GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────────────────────────────────────── -->
 <section id="contact">
-  <div class="card-custom mt-5" style="max-width: 700px; margin:auto;">
+  <div class="container">
 
-    <p class="mb-4" style="color: var(--muted);">
-      Got a project idea, a collaboration proposal, or want to talk basketball?<br>
-      Drop me a message — I don’t bite 😄
-    </p>
+    <p class="sec-label text-center">// Get In Touch</p>
+    <h2 class="sec-title text-center">Contact</h2>
+    <div class="sec-line mx-auto"></div>
 
-    <!-- Instagram -->
-    <a href="https://instagram.com/_matimbu" target="_blank" class="contact-item d-block mb-3">
-      <div class="p-3 rounded">
+    <div class="contact-wrap">
+
+      <p class="mb-4" style="color: var(--muted);">
+        Got a project idea, a collaboration proposal, or want to talk basketball?
+        Drop me a message — I don't bite 😄
+      </p>
+
+      <a href="https://instagram.com/_matimbu" target="_blank" class="contact-item d-block mb-3 p-3 rounded">
         <small style="color: var(--muted);">Instagram</small><br>
         <strong>@_matimbu</strong>
+      </a>
+
+      <div class="contact-item mb-3 p-3 rounded">
+        <small style="color: var(--muted);">School</small><br>
+        <strong>STI College Malolos — BSIT</strong>
       </div>
-    </a>
 
-    <!-- School -->
-    <div class="contact-item mb-3 p-3 rounded">
-      <small style="color: var(--muted);">School</small><br>
-      <strong>STI College Malolos — BSIT</strong>
+      <div class="contact-item mb-3 p-3 rounded">
+        <small style="color: var(--muted);">SAP Certified</small><br>
+        <strong>S/4HANA — SD, MM, PP, FI, CO</strong>
+      </div>
+
+      <div class="contact-item mb-0 p-3 rounded">
+        <small style="color: var(--muted);">Nickname</small><br>
+        <strong>Yao Ming — The Court's Coder</strong>
+      </div>
+
     </div>
-
-    <!-- SAP -->
-    <div class="contact-item mb-3 p-3 rounded">
-      <small style="color: var(--muted);">SAP Certified</small><br>
-      <strong>S/4HANA — SD, MM, PP, FI, CO</strong>
-    </div>
-
-    <!-- Nickname -->
-    <div class="contact-item mb-4 p-3 rounded">
-      <small style="color: var(--muted);">Nickname</small><br>
-      <strong>Yao Ming — The Court's Coder</strong>
-    </div>
-
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Raywel Francis Martin</p>
+  <p class="mb-0">© 2026 Raywel Francis Martin</p>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
